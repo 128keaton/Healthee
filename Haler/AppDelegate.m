@@ -7,9 +7,11 @@
 //
 
 #import "AppDelegate.h"
-
+#import <HealthKit/HealthKit.h>
+#import "ViewController.h"
 @interface AppDelegate ()
-            
+
+@property (nonatomic, readwrite) HKHealthStore *healthStore;
 
 @end
 
@@ -20,9 +22,59 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    if ([HKHealthStore isHealthDataAvailable]) {
+        self.healthStore = [[HKHealthStore alloc] init];
+        NSSet *writeDataTypes = [self dataTypesToWrite];
+        NSSet *readDataTypes = [self dataTypesToRead];
+        [self.healthStore requestAuthorizationToShareTypes:writeDataTypes readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
+            
+            if (!success) {
+                NSLog(@"You didn't allow HealthKit to access these read/write data types. In your app, try to handle this error gracefully when a user decides not to provide access. The error was: %@. If you're using a simulator, try it on a device.", error);
+                return;
+            }
+            
+            // Handle success in your app here.
+            [self setupHealthStoreForTabBarControllers];
+        }];
+    }
+    
     return YES;
+
 }
+
+
+
+- (NSSet *)dataTypesToWrite {
+    HKQuantityType *inhalerUsage = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierInhalerUsage];
+       HKQuantityType *bodyMass = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+    return [NSSet setWithObjects:inhalerUsage, bodyMass, nil];
+}
+
+
+- (NSSet *)dataTypesToRead {
+    HKQuantityType *inhalerUsage = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierInhalerUsage];
+     HKQuantityType *bodyMass = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+    return [NSSet setWithObjects:inhalerUsage, bodyMass, nil];
+}
+- (void)setupHealthStoreForTabBarControllers {
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+    splitViewController.delegate = (id)navigationController.topViewController;
+        UITabBarController *tabBarController = (UITabBarController *)[self.window rootViewController];
+        for (UINavigationController *navigationController in tabBarController.viewControllers) {
+            id viewController = navigationController.topViewController;
+            if ([viewController isKindOfClass:[ViewController class]]) {
+                ViewController *testController = viewController;
+                testController.healthStore = self.healthStore;
+            }
+
+       
+  
+}
+}
+
+
+// Returns the types of data that Fit wishes to read from HealthKit.
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

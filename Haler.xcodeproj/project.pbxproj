@@ -14,6 +14,7 @@
 		8A743544194FB8A300C6B80B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A743542194FB8A300C6B80B /* Main.storyboard */; };
 		8A743546194FB8A300C6B80B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A743545194FB8A300C6B80B /* Images.xcassets */; };
 		8A743552194FB8A300C6B80B /* HalerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A743551194FB8A300C6B80B /* HalerTests.m */; };
+		8A74355C194FB8B300C6B80B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A74355B194FB8B300C6B80B /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		8A74354B194FB8A300C6B80B /* HalerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HalerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A743550194FB8A300C6B80B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A743551194FB8A300C6B80B /* HalerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HalerTests.m; sourceTree = "<group>"; };
+		8A74355B194FB8B300C6B80B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		8A743560194FBC5400C6B80B /* Haler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Haler.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A74355C194FB8B300C6B80B /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +67,7 @@
 		8A743529194FB8A200C6B80B = {
 			isa = PBXGroup;
 			children = (
+				8A74355B194FB8B300C6B80B /* HealthKit.framework */,
 				8A743534194FB8A300C6B80B /* Haler */,
 				8A74354E194FB8A300C6B80B /* HalerTests */,
 				8A743533194FB8A300C6B80B /* Products */,
@@ -81,6 +86,7 @@
 		8A743534194FB8A300C6B80B /* Haler */ = {
 			isa = PBXGroup;
 			children = (
+				8A743560194FBC5400C6B80B /* Haler.entitlements */,
 				8A743539194FB8A300C6B80B /* AppDelegate.h */,
 				8A74353A194FB8A300C6B80B /* AppDelegate.m */,
 				8A74353F194FB8A300C6B80B /* ViewController.h */,
@@ -168,6 +174,12 @@
 				TargetAttributes = {
 					8A743531194FB8A300C6B80B = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = Z48RKT6B3T;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					8A74354A194FB8A300C6B80B = {
 						CreatedOnToolsVersion = 6.0;
@@ -336,9 +348,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Haler/Haler.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Haler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -347,9 +363,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Haler/Haler.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Haler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

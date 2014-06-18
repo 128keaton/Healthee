@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <HealthKit/HealthKit.h>
+@interface ViewController : UITableViewController <UITextFieldDelegate>{
+    
+    IBOutlet UITextField  *puffs;
+    IBOutlet UILabel *info;
+    IBOutlet UITextField *type;
+    IBOutlet UITextField *weightf;
+    IBOutlet UILabel *weightstats;
+    
+}
+@property (nonatomic) HKHealthStore *healthStore;
 
-@interface ViewController : UIViewController
 
 
 @end
