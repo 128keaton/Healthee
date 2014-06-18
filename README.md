@@ -1,7 +1,18 @@
 Haler
-=====
+=========
 
-An app that demonstrates the HealthKit in iOS 8+
+Platform to test HealthKit.
 
+Requirements:
+------------
+Xcode6
 
-Just build and run in Xcode beta.
+Compatibility
+------------
+Tested on iOS 8 b1.
+
+Installation
+-----------
+Compile and run on iOS 8 device.
+
+     
