@@ -11,7 +11,7 @@ Requirements:
 
 Compatibility
 ------------
-Tested on iOS 8 b1, b2.
+Tested on iOS 8.
 
 Installation
 -----------
