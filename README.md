@@ -1,4 +1,4 @@
-Haler
+Healthee
 =========
 
 Platform to test HealthKit.
